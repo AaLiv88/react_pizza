@@ -3,7 +3,7 @@ import plusImg from "./../asset/img/plus.svg";
 import minusImg from "./../asset/img/minus.svg";
 import trashImg from "./../asset/img/trash.svg";
 
-const CartItem = ({}) => {
+const CartItem = () => {
     return (
         <div className="cart__item">
             <div className="cart__item-img">

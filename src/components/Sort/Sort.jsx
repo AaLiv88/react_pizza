@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { setSortMethIndex } from "../../redux/slices/filterSlice";
+import sortMethods from "./sortMethods";
 
 const Sort = () => {
     const [activePopup, setActivePopup] = useState(false);
-    const [activeSort, setActiveSort] = useState(0);
-    const sortMethods = ["популярности", "цене", "алфавиту"];
+    const selectedIndex = useSelector(store => store.filter.sortIndex);
+    const dispatch = useDispatch();
+    const sortRef = useRef();
 
-    // document.addEventListener("click", e => {
-    //     setActivePopup(false);
-    //     e.stopPropagation();
-    // });
+    useEffect(() => {
+        const handleClickOutside = e => {
+            if (!e.path.includes(sortRef.current)) {
+                setActivePopup(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
 
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div onClick={() => setActivePopup(!activePopup)} className="sort__label">
                 <svg
                     width="10"
@@ -26,7 +36,7 @@ const Sort = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>{sortMethods[activeSort]}</span>
+                <span>{sortMethods[selectedIndex].name}</span>
             </div>
             {activePopup &&
                 <div className="sort__popup">
@@ -35,12 +45,12 @@ const Sort = () => {
                             <li
                                 key={index}
                                 onClick={() => {
-                                    setActiveSort(index);
+                                    dispatch(setSortMethIndex(index));
                                     setActivePopup(false);
                                 }}
-                                className={index === activeSort ? "active" : ""}
+                                className={index === selectedIndex ? "active" : ""}
                             >
-                                {method}
+                                {method.name}
                             </li>
                         )}
                     </ul>
