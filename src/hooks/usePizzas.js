@@ -1,13 +1,13 @@
-import sortMethods from "../components/Sort/sortMethods";
+import sortMethods from "../consts/sortMethods";
 import useRequest from "./useRequest";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import qs from "qs";
 import { useState } from "react";
+import { MOCK_API_PIZZAS_URL } from "../consts/mockAPI";
 
-
-const usePizzes = (filter) => {
+const usePizzas = (filter) => {
     const sortBy = sortMethods[filter.sortIndex].type.replace('-', '');
     const order = sortMethods[filter.sortIndex].type.includes('-') ? 'asc' : 'desc';
     const category = filter.categoryIndex !== 0 ? filter.categoryIndex : "";
@@ -17,27 +17,16 @@ const usePizzes = (filter) => {
     const navigate = useNavigate();
     const [isFirstRender, setIsFirstRender] = useState(true);
 
-    const getPizzesPromise = () => {
-        return axios.get("https://6294eeb9a7203b3ed07431ae.mockapi.io/pizzes", {
-            params: {
-                category,
-                title,
-                page,
-                limit: 4,
-                sortBy,
-                order,
-            }
-        });
-    }
-    const [pizzes, isLoading, error] = useRequest(getPizzesPromise, filter);
+    const [pizzes, isLoading, error] = useRequest(
+        MOCK_API_PIZZAS_URL,
+        { sortBy, order, category, title, page, limit: 4 },
+        filter
+    );
 
     useEffect(() => {
         if (!isFirstRender) {
             const queryString = qs.stringify({
-                categoryIndex: filter.categoryIndex,
-                sortIndex: filter.sortIndex,
-                currentPage: filter.currentPage,
-                searchValue: filter.searchValue,
+                ...filter
             });
             navigate(`?${queryString}`);
         }
@@ -47,4 +36,4 @@ const usePizzes = (filter) => {
     return [pizzes, isLoading, error];
 }
 
-export default usePizzes;
+export default usePizzas;

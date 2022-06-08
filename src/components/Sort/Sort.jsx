@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setSortMethIndex } from "../../redux/slices/filterSlice";
-import sortMethods from "./sortMethods";
+import sortMethods from "../../consts/sortMethods";
 
 const Sort = () => {
     const [activePopup, setActivePopup] = useState(false);
@@ -19,6 +19,8 @@ const Sort = () => {
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
+
+    console.log(123);
 
     return (
         <div ref={sortRef} className="sort">

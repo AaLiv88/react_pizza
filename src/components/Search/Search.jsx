@@ -1,13 +1,14 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classes from "./Search.module.scss";
 import { debounce } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue } from "../../redux/slices/filterSlice";
 
 const Search = () => {
+    const reduxSearchValue = useSelector(state => state.filter.searchValue);
     const [value, setValue] = useState("");
     const inputRef = useRef();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const updateSearch = useCallback(
         debounce((srt) => {
@@ -18,8 +19,11 @@ const Search = () => {
     const onChangeSearch = value => {
         setValue(value);
         updateSearch(value);
-    }
+    };
 
+    useEffect(() => {
+        setValue(reduxSearchValue);
+    }, []);
 
     return (
         <div className="wrapper">

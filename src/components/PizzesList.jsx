@@ -2,11 +2,12 @@ import React from 'react';
 import PizzaBlockLoader from "./PizzaBlock/PizzaBlockLoader";
 import PizzaBlock from "./PizzaBlock/PizzaBlock";
 import { useDispatch, useSelector } from "react-redux";
-import usePizzes from "../hooks/usePizzes";
+import usePizzas from "../hooks/usePizzas";
+import { Link } from "react-router-dom";
 
 const PizzesList = () => {
     const filter = useSelector(state => state.filter);
-    const [pizzes, isLoading, error] = usePizzes(filter);
+    const [pizzas, isLoading, error] = usePizzas(filter);
 
     if (error) {
         alert("Произошла ошибка перезагрузите страницу");
@@ -19,7 +20,9 @@ const PizzesList = () => {
             <div className="content__items">
                 {isLoading
                     ? [...new Array(4)].map((_, index) => <PizzaBlockLoader key={index}/>)
-                    : pizzes && pizzes.map(pizza => <PizzaBlock key={pizza.id} {...pizza}/>)
+                    : pizzas && pizzas.map(pizza =>
+                        <PizzaBlock key={pizza.id} {...pizza}/>
+                    )
                 }
             </div>
         </>
