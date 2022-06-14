@@ -4,22 +4,26 @@ import minusImg from "./../asset/img/minus.svg";
 import trashImg from "./../asset/img/trash.svg";
 import { useDispatch } from "react-redux";
 import { addCartList, decrementPizzas, removeFromCartList } from "../redux/slices/cartSlice";
-import { ICartItem } from "../types/cartItem";
+import { ICartItem } from "../types/ICartItem";
+import { useTypeSelector } from "../hooks/useTypeSelector";
 
+interface CartItemProps {
+    pizza: ICartItem;
+}
 
-const CartItem: FC<ICartItem> = ({title, type, size, price, count, imageUrl, id }) => {
+const CartItem: FC<CartItemProps> = ({ pizza }) => {
     const dispatch = useDispatch();
 
     function onIncrementPizzas() {
-        dispatch(addCartList({ id, type, size }));
+        dispatch(addCartList(pizza));
     }
 
     function onDecrementPizzas() {
-        count <= 1 ? removePizza() : dispatch(decrementPizzas({ id, type, size }));
+        pizza.count <= 1 ? removePizza() : dispatch(decrementPizzas(pizza));
     }
 
     function removePizza() {
-        dispatch(removeFromCartList({ id }));
+        dispatch(removeFromCartList(pizza));
     }
 
     return (
@@ -27,25 +31,25 @@ const CartItem: FC<ICartItem> = ({title, type, size, price, count, imageUrl, id 
             <div className="cart__item-img">
                 <img
                     className="pizza-block__image"
-                    src={imageUrl}
+                    src={pizza.imageUrl}
                     alt="Pizza"
                 />
             </div>
             <div className="cart__item-info">
-                <h3>{title}</h3>
-                <p>{type}, {size} см.</p>
+                <h3>{pizza.title}</h3>
+                <p>{pizza.type}, {pizza.size} см.</p>
             </div>
             <div className="cart__item-count">
                 <div onClick={onDecrementPizzas} className="button button--outline button--circle cart__item-count-minus">
                     <img src={minusImg} alt="минус"/>
                 </div>
-                <b>{count}</b>
+                <b>{pizza.count}</b>
                 <div onClick={onIncrementPizzas} className="button button--outline button--circle cart__item-count-plus">
                     <img src={plusImg} alt="плюс"/>
                 </div>
             </div>
             <div className="cart__item-price">
-                <b>{price * count} ₽</b>
+                <b>{pizza.price * pizza.count} ₽</b>
             </div>
             <div onClick={removePizza} className="cart__item-remove">
                 <div className="button button--outline button--circle">

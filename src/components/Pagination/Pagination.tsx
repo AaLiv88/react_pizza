@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../redux/slices/filterSlice";
 import cl from "./Pagionation.module.scss";
+import {useTypeDispatch} from "../../hooks/useTypeDispatch";
+import {useTypeSelector} from "../../hooks/useTypeSelector";
 
 const Pagination = () => {
-    const currentPage = useSelector(state => state.filter.currentPage);
-    const dispatch = useDispatch();
+    const currentPage = useTypeSelector(state => state.filter.currentPage);
+    const dispatch = useTypeDispatch();
     const totalPages = 3;
 
     return (

@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image {
+  width: 45%;
+}
+
+.options {
+  width: 45%;
+  height: 300px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.info {
+  margin-bottom: 40px;
+}

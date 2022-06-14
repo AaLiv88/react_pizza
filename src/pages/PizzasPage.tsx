@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Categories from "../components/Categories";
 import Sort from "../components/Sort/Sort";
 import Pagination from "../components/Pagination/Pagination";
-import PizzesList from "../components/PizzesList";
+import PizzasList from "../components/PizzasList";
 
-const PizzesPage = () => {
+
+const PizzasPage: FC = () => {
     return (
-        <div className="container">
+        <>
             <div className="content__top">
                 <Categories/>
                 <Sort/>
             </div>
-            <PizzesList/>
+            <PizzasList/>
             <Pagination/>
-        </div>
+        </>
     );
 };
 
-export default PizzesPage;
+export default PizzasPage;

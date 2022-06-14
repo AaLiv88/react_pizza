@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import getCount from "../utils/getCount";
+import { useTypeSelector } from "../hooks/useTypeSelector";
 
-const GoCartBtn = () => {
-    const { cartList, totalPrice } = useSelector(state => state.cart);
+const GoCartBtn: FC = () => {
+    const { cartList, totalPrice } = useTypeSelector(state => state.cart);
     const cartCount = getCount(cartList);
 
     return (

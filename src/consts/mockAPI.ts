@@ -1,0 +1,1 @@
+export const MOCK_API_PIZZAS_URL: string = "https://6294eeb9a7203b3ed07431ae.mockapi.io/pizzes";

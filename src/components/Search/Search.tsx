@@ -3,10 +3,11 @@ import classes from "./Search.module.scss";
 import { debounce } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue } from "../../redux/slices/filterSlice";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
 
 const Search = () => {
     const dispatch = useDispatch();
-    const reduxSearchValue = useSelector(state => state.filter.searchValue);
+    const reduxSearchValue = useTypeSelector(state => state.filter.searchValue);
     const [value, setValue] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -16,7 +17,7 @@ const Search = () => {
         }, 1000), []
     );
 
-    const onChangeSearch = (value: string) => {
+    const onChangeSearch = (value: string): void => {
         setValue(value);
         updateSearch(value);
     };
@@ -31,7 +32,7 @@ const Search = () => {
     }, []);
 
     return (
-        <div className="wrapper">
+        <div className="">
             <input
                 ref={inputRef}
                 value={value}

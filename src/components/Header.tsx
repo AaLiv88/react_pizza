@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import logo from "../asset/img/pizza-logo.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Search from "./Search/Search";
 import GoCartBtn from "./GoCartBtn";
 
-const Header = () => {
-    const { pathname } = useLocation();
+const Header: FC = () => {
 
     return (
         <div className="header">
@@ -19,12 +18,8 @@ const Header = () => {
                         </div>
                     </div>
                 </Link>
-                {pathname !== "/cart" &&
-                    <>
-                        <Search/>
-                        <GoCartBtn/>
-                    </>
-                }
+                <Search/>
+                <GoCartBtn/>
             </div>
         </div>
     );

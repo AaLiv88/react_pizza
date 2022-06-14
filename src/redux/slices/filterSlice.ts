@@ -1,7 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import qs from "qs"
 
-const getInitialState = () => {
+export interface FilterState {
+    categoryIndex: number;
+    sortIndex: number;
+    currentPage: number;
+    searchValue: string;
+}
+
+const getInitialState = (): FilterState => {
     if (!window.location.search) {
         return {
             categoryIndex: 0,
@@ -13,10 +20,10 @@ const getInitialState = () => {
 
     const params = qs.parse(window.location.search.substring(1));
     return {
-        categoryIndex: +params.categoryIndex,
-        sortIndex: +params.sortIndex,
-        currentPage: +params.currentPage,
-        searchValue: params.searchValue,
+        categoryIndex: Number(params.categoryIndex),
+        sortIndex: Number(params.sortIndex),
+        currentPage: Number(params.currentPage),
+        searchValue: String(params.searchValue),
     };
 }
 
@@ -26,16 +33,16 @@ export const filterSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        setCategoryIndex(state, action) {
+        setCategoryIndex(state: FilterState, action: PayloadAction<number>) {
             state.categoryIndex = action.payload;
         },
-        setSortMethIndex(state, action) {
+        setSortMethIndex(state: FilterState, action: PayloadAction<number>) {
             state.sortIndex = action.payload;
         },
-        setSearchValue(state, action) {
+        setSearchValue(state: FilterState, action: PayloadAction<string>) {
             state.searchValue = action.payload;
         },
-        setCurrentPage(state, action) {
+        setCurrentPage(state: FilterState, action: PayloadAction<number>) {
             state.currentPage = action.payload;
         },
     },

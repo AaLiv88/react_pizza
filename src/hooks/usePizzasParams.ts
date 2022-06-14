@@ -1,27 +1,28 @@
 import sortMethods from "../consts/sortMethods";
-import useRequest from "./useRequest";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import qs from "qs";
-import { useState } from "react";
-import { MOCK_API_PIZZAS_URL } from "../consts/mockAPI";
+import { FilterState } from "../redux/slices/filterSlice";
 
-const usePizzas = (filter) => {
+export interface PizzaQueryParams {
+    sortBy: string;
+    order: string;
+    category: number | string;
+    title: string;
+    page: number;
+    limit: number;
+}
+
+const usePizzas = (filter: FilterState): PizzaQueryParams => {
     const sortBy = sortMethods[filter.sortIndex].type.replace('-', '');
     const order = sortMethods[filter.sortIndex].type.includes('-') ? 'asc' : 'desc';
     const category = filter.categoryIndex !== 0 ? filter.categoryIndex : "";
     const title = filter.searchValue;
     const page = filter.currentPage;
+    const limit = 4;
 
     const navigate = useNavigate();
     const [isFirstRender, setIsFirstRender] = useState(true);
-
-    const [pizzes, isLoading, error] = useRequest(
-        MOCK_API_PIZZAS_URL,
-        { sortBy, order, category, title, page, limit: 4 },
-        filter
-    );
 
     useEffect(() => {
         if (!isFirstRender) {
@@ -33,7 +34,7 @@ const usePizzas = (filter) => {
         setIsFirstRender(false);
     }, [filter]);
 
-    return [pizzes, isLoading, error];
+    return { sortBy, order, category, title, page, limit }
 }
 
 export default usePizzas;

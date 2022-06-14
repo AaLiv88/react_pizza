@@ -1,17 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import { setSortMethIndex } from "../../redux/slices/filterSlice";
 import sortMethods from "../../consts/sortMethods";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
+import { useTypeDispatch } from "../../hooks/useTypeDispatch";
+
 
 const Sort = () => {
-    const dispatch = useDispatch();
+    const dispatch = useTypeDispatch();
     const [activePopup, setActivePopup] = useState(false);
-    const selectedIndex = useSelector(store => store.filter.sortIndex);
+    const selectedIndex = useTypeSelector(store => store.filter.sortIndex);
     const sortRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (!e.path.includes(sortRef.current)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            const _event = event as MouseEvent & {
+                path: Node[]
+            }
+
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
                 setActivePopup(false);
             }
         };
