@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import PizzaBlockLoader from "./pizza/PizzaBlock/PizzaBlockLoader";
-import PizzaBlock from "./pizza/PizzaBlock/PizzaBlock";
-import { useTypeSelector } from "../hooks/useTypeSelector";
-import { pizzasApi } from "../redux/APIs/pizzaApi";
-import usePizzasParams from "../hooks/usePizzasParams";
-import { pizzasCategories } from "../consts/pizzasCategories";
+import PizzaBlockLoader from "./PizzaBlock/PizzaBlockLoader";
+import PizzaBlock from "./PizzaBlock/PizzaBlock";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
+import { pizzasApi } from "../../redux/pizzes/pizzaApi";
+import usePizzasParams from "../../hooks/usePizzasParams";
+import { pizzasCategories } from "../../consts/pizzasCategories";
 
 
 const PizzasList: FC = () => {

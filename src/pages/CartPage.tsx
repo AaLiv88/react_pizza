@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import CartItem from "../components/CartItem";
+import CartItem from "../components/Cart/CartItem";
 import { clearCartList } from "../redux/slices/cartSlice";
 import getCount from "../utils/getCount";
-import EmptyCart from "../components/EmptyCart";
+import EmptyCart from "../components/Cart/EmptyCart";
 import { useTypeDispatch } from "../hooks/useTypeDispatch";
 import { useTypeSelector } from "../hooks/useTypeSelector";
 

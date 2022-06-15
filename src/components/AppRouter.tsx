@@ -11,7 +11,7 @@ const AppRouter = () => {
         <Routes>
             <Route path="/" element={<MainLayout/>}>
                 <Route path="/" element={<PizzasPage/>}/>
-                <Route path="/pizza/:id" element={<PizzaByIdPage/>}/>
+                <Route path="/pizza/:id/:type/:size" element={<PizzaByIdPage/>}/>
                 <Route path="/cart" element={<CartPage/>}/>
                 <Route path="*" element={<NotFoundPage/>}/>
             </Route>

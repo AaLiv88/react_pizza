@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import plusImg from "./../asset/img/plus.svg";
-import minusImg from "./../asset/img/minus.svg";
-import trashImg from "./../asset/img/trash.svg";
+import plusImg from "../../asset/img/plus.svg";
+import minusImg from "../../asset/img/minus.svg";
+import trashImg from "../../asset/img/trash.svg";
 import { useDispatch } from "react-redux";
-import { addCartList, decrementPizzas, removeFromCartList } from "../redux/slices/cartSlice";
-import { ICartItem } from "../types/ICartItem";
-import { useTypeSelector } from "../hooks/useTypeSelector";
+import { addCartList, decrementPizzas, removeFromCartList } from "../../redux/slices/cartSlice";
+import { ICartItem } from "../../types/ICartItem";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
 
 interface CartItemProps {
     pizza: ICartItem;

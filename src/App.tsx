@@ -1,24 +1,27 @@
 import React from 'react';
 import "./scss/app.scss";
-import { Route, Routes } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
-import PizzasPage from "./pages/PizzasPage";
-import PizzaByIdPage from "./pages/PizzaByIdPage";
-import CartPage from "./pages/CartPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import AppRouter from "./components/AppRouter";
+import { useTypeDispatch } from "./hooks/useTypeDispatch";
+import { setOpen } from "./redux/slices/modalSlice";
+import { useTypeSelector } from "./hooks/useTypeSelector";
+import LoginModal from "./components/Modal/LoginModal/LoginModal";
 
 
 const App = () => {
+    const dispatch = useTypeDispatch();
+    const { isOpen: loginIsOpen } = useTypeSelector(state => state.modal);
 
     return (
-        <Routes>
-            <Route path="/" element={<MainLayout/>}>
-                <Route path="/" element={<PizzasPage/>}/>
-                <Route path="/pizza/:id/:type/:size" element={<PizzaByIdPage/>}/>
-                <Route path="/cart" element={<CartPage/>}/>
-                <Route path="*" element={<NotFoundPage/>}/>
-            </Route>
-        </Routes>
+        <div>
+            <button
+                onClick={() => dispatch(setOpen())}
+            >
+                Войти
+            </button>
+            <LoginModal/>
+
+            <AppRouter/>
+        </div>
     );
 };
 

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Categories from "../components/Categories";
 import Sort from "../components/Sort/Sort";
 import Pagination from "../components/Pagination/Pagination";
-import PizzasList from "../components/PizzasList";
+import PizzasList from "../components/pizza/PizzasList";
 
 
 const PizzasPage: FC = () => {

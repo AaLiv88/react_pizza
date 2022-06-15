@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from "@reduxjs/toolkit";
 import filter from "./slices/filterSlice";
 import cart from "./slices/cartSlice";
-import { pizzasApi } from "./APIs/pizzaApi";
+import modal from "./slices/modalSlice";
+import { pizzasApi } from "./pizzes/pizzaApi";
 
 
 const rootReducer = combineReducers({
     filter,
     cart,
+    modal,
     [pizzasApi.reducerPath]: pizzasApi.reducer,
 })
 

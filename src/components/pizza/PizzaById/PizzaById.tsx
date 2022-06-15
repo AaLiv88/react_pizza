@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { pizzasApi } from "../../../redux/APIs/pizzaApi";
+import { pizzasApi } from "../../../redux/pizzes/pizzaApi";
 import cl from "./PizzaById.module.scss";
 import SelectorList from "../shared/SelectorList/SelectorList";
 import { pizzaTypeNames } from "../../../consts/pizzaTypeNames";

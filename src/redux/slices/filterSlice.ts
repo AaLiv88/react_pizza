@@ -49,4 +49,4 @@ export const filterSlice = createSlice({
 });
 
 export const { setCategoryIndex, setSortMethIndex, setSearchValue, setCurrentPage } = filterSlice.actions;
-export default filterSlice.reducer
+export default filterSlice.reducer;
